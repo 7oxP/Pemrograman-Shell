@@ -17,7 +17,7 @@ if [ $(id -u) -eq 0 ]; then
     fi
 
     # Melakukan pengecekkan terhadap program Nginx
-    if ! command -v nginx; then
+    if ! command -v nginx> /dev/null 2>&1; then
         echo ""
         echo "Nginx belum terpasang. Memulai proses pengunduhan..."
         echo ""
@@ -40,13 +40,13 @@ if [ $(id -u) -eq 0 ]; then
     touch $path
     
     cat > $path << EOF
-    server {
-        listen 80;
-        location /$user {
-            proxy_pass http://$alamat;
-        }
+server {
+    listen 80;
+    location /$user {
+    proxy_pass http://$alamat/;
     }
-    EOF
+}
+EOF
 
     # Membuat symlink ke direktori sites-enabled
     ln -s $path /etc/nginx/sites-enabled/
@@ -54,7 +54,7 @@ if [ $(id -u) -eq 0 ]; then
     service nginx restart
 
     echo "Konfigurasi selesai!"
-    echo "Hasil konfigurasi dapat dilihat pada localhost'/'$user"
+    echo "Hasil konfigurasi dapat dilihat pada localhost/$user pada browser"
     
 else
     echo "Login sebagai root untuk menjalankan script ini"
