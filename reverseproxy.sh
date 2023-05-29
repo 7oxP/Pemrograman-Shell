@@ -22,7 +22,7 @@ if [ $(id -u) -eq 0 ]; then
         echo "Nginx belum terpasang. Memulai proses pengunduhan..."
         echo ""
 
-        apt-get install nginx-core -y
+        apt-get install nginx -y
         echo ""
         echo "Nginx berhasil diunduh dan diinstal."
     else
