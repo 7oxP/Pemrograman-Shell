@@ -47,7 +47,7 @@ server {
     }
 }
 EOF
-
+# test perubahan
     # Membuat symlink ke direktori sites-enabled
     ln -s $path /etc/nginx/sites-enabled/
 
